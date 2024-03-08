@@ -6,5 +6,4 @@ class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Дата создания"))
 
     class Meta:
-        ordering = ("-created_at",)
         abstract = True

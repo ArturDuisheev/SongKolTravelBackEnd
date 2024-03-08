@@ -14,5 +14,3 @@ class BlogNewsAdmin(sadmin.SummernoteModelAdmin):
     list_display = ('title', 'category', 'created_at')
     summernote_fields = ('content',)
     inlines = [SlidesAdmin, ]
-    ordering = ('-created_at',)
-

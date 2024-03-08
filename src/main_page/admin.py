@@ -13,7 +13,6 @@ def truncated_text(obj, text_field):
 @admin.register(FormQuestion)
 class FormQuestionAdmin(admin.ModelAdmin):
     list_display = ('truncated_question_text', 'contact', 'created_at')
-    ordering = ('-created_at',)
 
     def truncated_question_text(self, obj):
         return truncated_text(obj, 'question_text')
@@ -24,7 +23,6 @@ class FormQuestionAdmin(admin.ModelAdmin):
 @admin.register(OurTeam)
 class OurTeamAdmin(admin.ModelAdmin):
     list_display = ('name', 'position', 'truncated_experience')
-    ordering = ('-created_at',)
 
     def truncated_experience(self, obj):
         return truncated_text(obj, 'experience')
@@ -38,7 +36,6 @@ class OurTeamAdmin(admin.ModelAdmin):
 # @admin.register(QuestionList)
 # class QuestionListAdmin(admin.ModelAdmin):
 #     list_display = ('truncated_question', 'truncated_answer')
-#     ordering = ('-created_at',)
 #
 #     def truncated_question(self, obj):
 #         return truncated_text(obj, 'question')
