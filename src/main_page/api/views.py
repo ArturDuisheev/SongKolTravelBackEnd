@@ -32,6 +32,7 @@ class OurTeamRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 class QuestionListCreateView(generics.ListCreateAPIView):
     queryset = QuestionList.objects.all()
     serializer_class = QuestionListSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class QuestionListRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
