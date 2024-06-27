@@ -12,6 +12,10 @@ class BlogNews(BaseModel):
     image = models.ImageField(upload_to='blog_news_images', verbose_name=_("Изображение"))
     content = models.TextField(verbose_name=_("Контент"))
 
+    @property
+    def similar(self):
+        return BlogNews.objects.filter(category=self.category).exclude(id=self.id)[:5]
+
     def __str__(self):
         return str(
             format_lazy(_("Заголовок: {title} - Категория: {category}"), title=self.title, category=self.category))

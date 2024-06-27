@@ -1,11 +1,14 @@
+import re
 import requests
+
 from django.utils import timezone
-from main_page.api.serializers import FormQuestionSerializer
+from django.utils.translation import gettext_lazy as _
+
 from rest_framework import status, serializers
 from rest_framework.response import Response
-from django.utils.translation import gettext_lazy as _
+
 from core.config.helper.env_reader import env
-import re
+from main_page.api.serializers import FormQuestionSerializer
 
 
 class QuestionService:
@@ -31,7 +34,7 @@ class QuestionService:
                        f'Контакты: {serializer.validated_data["contact"]}\n'
                        f'Создано в: {timezone.now().strftime("%d.%m.%Y %H:%M:%S")}')
             url = f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}'
-            requests.post(url)
+            requests.post(url, verify=False)
 
             response_201 = {
                 "message": _("Ваш запрос успешно отправлен! Менеджер свяжется с вами в ближайшее время."),

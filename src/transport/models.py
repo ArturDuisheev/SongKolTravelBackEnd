@@ -21,8 +21,17 @@ class CarWithDriver(BaseModel):
 
 
 class CarWithoutDriver(BaseModel):
+    one_day = models.PositiveIntegerField(
+        _('Цена за один день')
+    )
+    two_day = models.PositiveIntegerField(
+        _('Цена за два дня')
+    )
+    more_day = models.PositiveIntegerField(
+        _('Цена за еще день')
+    )
     car = models.OneToOneField('CarRental', on_delete=models.CASCADE, related_name='car_without_driver')
-    how_days_driving = models.PositiveIntegerField(verbose_name=_('Количество дней езды без водителя'))
+
 
     class Meta:
         verbose_name = _("Машина без водителя")

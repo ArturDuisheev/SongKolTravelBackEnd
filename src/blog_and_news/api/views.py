@@ -8,7 +8,7 @@ from blog_and_news.api.filters import BlogNewsFilter
 from blog_and_news.models import Slides
 
 
-class BlogNewsListCreateView(generics.ListCreateAPIView):
+class BlogNewsListView(generics.ListAPIView):
     queryset = BlogNews.objects.all().prefetch_related('slides')
     serializer_class = BlogNewsSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]

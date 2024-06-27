@@ -12,6 +12,18 @@ class SlidersSerializer(serializers.ModelSerializer):
         fields = ("id", "slides", 'blog_news')
 
 
+class SimilarBlogNewsSerializer(serializers.ModelSerializer):
+    created_at = serializers.DateTimeField(format='%d.%m.%y', read_only=True)
+    class Meta:
+        model = BlogNews
+        fields = (
+            'id',
+            'title',
+            'created_at',
+            'image'
+        )
+
+
 class BlogNewsSerializer(serializers.ModelSerializer):
     slides = SlidersSerializer(many=True, required=False, read_only=True)
     upload_slides = serializers.ListField(
@@ -20,18 +32,17 @@ class BlogNewsSerializer(serializers.ModelSerializer):
     )
     created_at = serializers.DateTimeField(format='%d.%m.%y', read_only=True)
     content = serializers.SerializerMethodField()
+    similar = SimilarBlogNewsSerializer(many=True, read_only=True)
 
     class Meta:
         model = BlogNews
-        fields = ('id', 'title', 'category', 'created_at', 'image', 'content', 'slides', 'upload_slides')
+        fields = ('id', 'title', 'category', 'created_at', 'image', 'content', 'slides', 'upload_slides', 'similar',)
 
     def get_content(self, obj):
-        # Получение хоста из контекста запроса
         request = self.context.get('request')
         current_site = get_current_site(request)
         host = current_site.domain
 
-        # Замена пути к изображению на полный URL-адрес с хостом и декодирование символов
         content = obj.content
         content_with_host = content.replace('/sr/media/', f'http://{host}/sr/media/')
         decoded_content = unquote(content_with_host)

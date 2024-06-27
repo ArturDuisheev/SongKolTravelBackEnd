@@ -12,7 +12,7 @@ class CarWithDriverSerializer(serializers.ModelSerializer):
 class CarWithoutDriverSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarWithoutDriver
-        fields = ('how_days_driving',)
+        fields = ('one_day', 'two_day', 'more_day')
 
 
 class PhotoSerializer(serializers.ModelSerializer):

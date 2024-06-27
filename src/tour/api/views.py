@@ -32,6 +32,12 @@ class TourAddListCreateAPIView(generics.ListAPIView):
     filterset_class = TourAddFilter
 
 
+class TourListAPIView(generics.RetrieveAPIView):
+    queryset = TourAdd.objects.all()
+    serializer_class = TourAddSerializer
+    lookup_field = 'id'
+
+
 class TourProgramListCreateView(generics.ListCreateAPIView):
     queryset = TourProgram.objects.all()
     serializer_class = TourProgramSerializer
