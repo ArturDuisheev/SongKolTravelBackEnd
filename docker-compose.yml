@@ -1,0 +1,49 @@
+version: '3.3'
+
+services:
+
+  back-end:
+    build:
+      context: ./src
+      dockerfile: Dockerfile.backend
+    command:
+      - './builder.sh'
+    ports:
+      - "8000:8000"
+    env_file:
+      - './src/.env'
+    restart: always
+
+  front:
+    build:
+      context: ../sonkol
+      dockerfile: Dockerfile.front
+    ports:
+      - "3000:3000"
+    hostname: 'samara'
+
+  gateway:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./src/core/static:/home/app/web/static
+      - ./src/core/media:/home/app/web/media
+    depends_on:
+      - back-end
+      - front
+  db:
+    image: postgres:15.1-alpine3.17
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgres/data/
+    env_file:
+      - ./src/.env
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:

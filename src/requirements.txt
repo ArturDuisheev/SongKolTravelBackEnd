@@ -8,6 +8,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 Django==4.1.7
 django-cors-headers==4.0.0
+django-debug-toolbar==4.3.0
 django-filter==23.2
 django-jazzmin==2.6.0
 django-ratelimit2==0.4.2
@@ -39,5 +40,5 @@ tomli==2.0.1
 twilio==7.17.0
 tzdata==2022.7
 uritemplate==4.1.1
-urllib3==2.0.2
+urllib3==1.26.6
 webencodings==0.5.1
